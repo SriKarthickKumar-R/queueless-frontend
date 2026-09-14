@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Profile() {
 
   // =========================================
@@ -64,7 +66,7 @@ function Profile() {
 
       const response =
         await axios.get(
-          `http://localhost:8080/patients/${savedPatient.id}`
+          `${API_URL}/patients/${savedPatient.id}`
         );
 
 
@@ -163,7 +165,7 @@ function Profile() {
 
       const response =
         await axios.put(
-          `http://localhost:8080/patients/${patient.id}`,
+          `${API_URL}/patients/${patient.id}`,
           {
             name: name,
             email: email,

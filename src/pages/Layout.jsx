@@ -6,6 +6,8 @@ function Layout({ children }) {
 
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   // =========================================
   // PATIENT
@@ -44,7 +46,7 @@ function Layout({ children }) {
 
       const response =
         await axios.get(
-          `http://localhost:8080/notifications/patient/${patient.id}/unread/count`
+          `${API_URL}/notifications/patient/${patient.id}/unread/count`
         );
 
       setUnreadCount(response.data);

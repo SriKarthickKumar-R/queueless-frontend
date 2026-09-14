@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
 
   // SELECTED FILTERS
@@ -36,23 +38,23 @@ function AdminDashboard() {
       ] = await Promise.all([
 
         axios.get(
-          `http://localhost:8080/queues/doctor/${selectedDoctorId}/today`
+          `${API_URL}/queues/doctor/${selectedDoctorId}/today`
         ),
 
         axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         ),
 
         axios.get(
-          "http://localhost:8080/departments"
+          `${API_URL}/departments`
         ),
 
         axios.get(
-          "http://localhost:8080/doctors"
+          `${API_URL}/doctors`
         ),
 
         axios.get(
-          "http://localhost:8080/patients"
+          `${API_URL}/patients`
         )
 
       ]);

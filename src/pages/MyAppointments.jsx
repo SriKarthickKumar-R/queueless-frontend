@@ -4,6 +4,13 @@ import axios from "axios";
 function MyAppointments() {
 
   // =========================================
+  // API URL
+  // =========================================
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
+
+  // =========================================
   // APPOINTMENT STATE
   // =========================================
 
@@ -76,7 +83,7 @@ function MyAppointments() {
 
       const response =
         await axios.get(
-          `http://localhost:8080/appointments/patient/${patient.id}`
+          `${API_URL}/appointments/patient/${patient.id}`
         );
 
 
@@ -143,19 +150,19 @@ function MyAppointments() {
       ] = await Promise.all([
 
         axios.get(
-          `http://localhost:8080/queues/patient/${patient.id}/history`
+          `${API_URL}/queues/patient/${patient.id}/history`
         ),
 
         axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         ),
 
         axios.get(
-          "http://localhost:8080/departments"
+          `${API_URL}/departments`
         ),
 
         axios.get(
-          "http://localhost:8080/doctors"
+          `${API_URL}/doctors`
         )
 
       ]);
@@ -309,7 +316,7 @@ function MyAppointments() {
 
       const response =
         await axios.put(
-          `http://localhost:8080/appointments/${id}/cancel`
+          `${API_URL}/appointments/${id}/cancel`
         );
 
 

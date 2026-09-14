@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ReceptionistDashboard() {
 
   // =========================================
@@ -42,15 +44,15 @@ function ReceptionistDashboard() {
       ] = await Promise.all([
 
         axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         ),
 
         axios.get(
-          "http://localhost:8080/departments"
+          `${API_URL}/departments`
         ),
 
         axios.get(
-          "http://localhost:8080/doctors"
+          `${API_URL}/doctors`
         )
 
       ]);
@@ -88,7 +90,7 @@ function ReceptionistDashboard() {
     try {
 
       const response = await axios.get(
-        `http://localhost:8080/queues/doctor/${selectedDoctorId}/today`
+        `${API_URL}/queues/doctor/${selectedDoctorId}/today`
       );
 
       const queueData = response.data;
@@ -265,7 +267,7 @@ function ReceptionistDashboard() {
     try {
 
       const response = await axios.put(
-        `http://localhost:8080/queues/doctor/${selectedDoctorId}/call-next`
+        `${API_URL}/queues/doctor/${selectedDoctorId}/call-next`
       );
 
 
@@ -326,7 +328,7 @@ function ReceptionistDashboard() {
     try {
 
       await axios.put(
-        `http://localhost:8080/queues/${currentPatient.id}/complete`
+        `${API_URL}/queues/${currentPatient.id}/complete`
       );
 
 
@@ -376,7 +378,7 @@ function ReceptionistDashboard() {
     try {
 
       await axios.put(
-        `http://localhost:8080/queues/${currentPatient.id}/hold`
+        `${API_URL}/queues/${currentPatient.id}/hold`
       );
 
 
@@ -415,7 +417,7 @@ function ReceptionistDashboard() {
     try {
 
       await axios.put(
-        `http://localhost:8080/queues/${queueId}/recall`
+        `${API_URL}/queues/${queueId}/recall`
       );
 
 

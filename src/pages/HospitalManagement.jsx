@@ -3,6 +3,8 @@ import axios from "axios";
 
 function HospitalManagement() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [hospitals, setHospitals] = useState([]);
 
   const [name, setName] = useState("");
@@ -25,7 +27,7 @@ function HospitalManagement() {
 
       const response =
         await axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         );
 
       setHospitals(response.data);
@@ -92,7 +94,7 @@ function HospitalManagement() {
 
       const response =
         await axios.post(
-          "http://localhost:8080/hospitals",
+          `${API_URL}/hospitals`,
           {
             name: name.trim(),
             location: location.trim(),

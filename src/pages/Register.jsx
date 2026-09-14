@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Register() {
 
   const [name, setName] = useState("");
@@ -13,37 +15,37 @@ function Register() {
   const navigate = useNavigate();
 
   async function handleRegister(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match");
-    return;
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/patients`,
+        {
+          name: name,
+          email: email,
+          phone: phone,
+          password: password
+        }
+      );
+
+      console.log(response.data);
+
+      alert("Registration successful!");
+
+      navigate("/login");
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Registration failed. Please try again.");
+    }
   }
-
-  try {
-    const response = await axios.post(
-      "http://localhost:8080/patients",
-      {
-        name: name,
-        email: email,
-        phone: phone,
-        password: password
-      }
-    );
-
-    console.log(response.data);
-
-    alert("Registration successful!");
-
-    navigate("/login");
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert("Registration failed. Please try again.");
-  }
-}
 
   return (
     <div className="login-page">

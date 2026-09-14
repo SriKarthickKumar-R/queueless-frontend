@@ -4,6 +4,10 @@ import axios from "axios";
 
 function Login() {
 
+  // Backend API URL
+  const API_URL = import.meta.env.VITE_API_URL;
+
+
   // Store the email entered by the user
   const [email, setEmail] = useState("");
 
@@ -23,7 +27,7 @@ function Login() {
 
       // Send login information to Spring Boot
       const response = await axios.post(
-        "http://localhost:8080/auth/login",
+        `${API_URL}/auth/login`,
         {
           email: email,
           password: password

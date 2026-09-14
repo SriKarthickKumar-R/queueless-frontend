@@ -3,6 +3,8 @@ import axios from "axios";
 
 function AppointmentBooking() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [hospitals, setHospitals] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [doctors, setDoctors] = useState([]);
@@ -61,15 +63,15 @@ function AppointmentBooking() {
         ] = await Promise.all([
 
           axios.get(
-            "http://localhost:8080/hospitals"
+            `${API_URL}/hospitals`
           ),
 
           axios.get(
-            "http://localhost:8080/departments"
+            `${API_URL}/departments`
           ),
 
           axios.get(
-            "http://localhost:8080/doctors"
+            `${API_URL}/doctors`
           )
 
         ]);
@@ -127,7 +129,7 @@ function AppointmentBooking() {
       try {
 
         const response = await axios.get(
-          `http://localhost:8080/appointments/doctor/${selectedDoctorId}/date/${date}`
+          `${API_URL}/appointments/doctor/${selectedDoctorId}/date/${date}`
         );
 
         console.log(
@@ -352,7 +354,7 @@ function AppointmentBooking() {
 
       const response =
         await axios.post(
-          "http://localhost:8080/appointments",
+          `${API_URL}/appointments`,
           appointmentData
         );
 

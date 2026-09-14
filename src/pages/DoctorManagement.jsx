@@ -3,6 +3,8 @@ import axios from "axios";
 
 function DoctorManagement() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [hospitals, setHospitals] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [doctors, setDoctors] = useState([]);
@@ -28,15 +30,17 @@ function DoctorManagement() {
 
       const response =
         await axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         );
 
       setHospitals(response.data);
 
       if (response.data.length > 0) {
+
         setSelectedHospitalId(
           response.data[0].id.toString()
         );
+
       }
 
     } catch (error) {
@@ -68,7 +72,7 @@ function DoctorManagement() {
 
       const response =
         await axios.get(
-          `http://localhost:8080/departments/hospital/${hospitalId}`
+          `${API_URL}/departments/hospital/${hospitalId}`
         );
 
       setDepartments(response.data);
@@ -109,7 +113,7 @@ function DoctorManagement() {
 
       const response =
         await axios.get(
-          "http://localhost:8080/doctors"
+          `${API_URL}/doctors`
         );
 
       setDoctors(response.data);
@@ -216,7 +220,7 @@ function DoctorManagement() {
 
       const response =
         await axios.post(
-          "http://localhost:8080/doctors",
+          `${API_URL}/doctors`,
           {
             name: name.trim(),
             specialization:

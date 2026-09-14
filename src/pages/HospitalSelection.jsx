@@ -4,6 +4,8 @@ import axios from "axios";
 
 function HospitalSelection() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [search, setSearch] = useState("");
 
   const [hospitals, setHospitals] = useState([]);
@@ -12,7 +14,7 @@ function HospitalSelection() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/hospitals")
+      .get(`${API_URL}/hospitals`)
       .then((response) => {
         setHospitals(response.data);
         setLoading(false);

@@ -4,6 +4,8 @@ import axios from "axios";
 
 function JoinQueue() {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const { hospitalId, departmentId, doctorId } = useParams();
 
   const [token, setToken] = useState(null);
@@ -26,7 +28,7 @@ function JoinQueue() {
     try {
 
       const response = await axios.get(
-        `http://localhost:8080/queues/doctor/${doctorId}/today`
+        `${API_URL}/queues/doctor/${doctorId}/today`
       );
 
       const queue = response.data;
@@ -304,7 +306,7 @@ function JoinQueue() {
 
       const response =
         await axios.post(
-          "http://localhost:8080/queues/join",
+          `${API_URL}/queues/join`,
           queueData
         );
 

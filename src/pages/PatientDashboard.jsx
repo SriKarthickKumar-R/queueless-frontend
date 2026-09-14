@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function PatientDashboard() {
 
   const [queue, setQueue] = useState(null);
@@ -103,7 +105,7 @@ function PatientDashboard() {
 
       const response =
         await axios.get(
-          `http://localhost:8080/queues/doctor/${savedQueue.doctorId}/today`
+          `${API_URL}/queues/doctor/${savedQueue.doctorId}/today`
         );
 
 
@@ -308,7 +310,7 @@ function PatientDashboard() {
 
       const response =
         await axios.get(
-          "http://localhost:8080/hospitals"
+          `${API_URL}/hospitals`
         );
 
 

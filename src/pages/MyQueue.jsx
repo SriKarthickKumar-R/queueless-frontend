@@ -3,6 +3,13 @@ import axios from "axios";
 
 function MyQueue() {
 
+  // =========================================
+  // API URL
+  // =========================================
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
+
   const [queueInfo, setQueueInfo] = useState(null);
   const [queueData, setQueueData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,15 +58,15 @@ function MyQueue() {
       ] = await Promise.all([
 
         axios.get(
-          `http://localhost:8080/hospitals/${savedQueue.hospitalId}`
+          `${API_URL}/hospitals/${savedQueue.hospitalId}`
         ),
 
         axios.get(
-          `http://localhost:8080/departments/${savedQueue.departmentId}`
+          `${API_URL}/departments/${savedQueue.departmentId}`
         ),
 
         axios.get(
-          `http://localhost:8080/doctors/${savedQueue.doctorId}`
+          `${API_URL}/doctors/${savedQueue.doctorId}`
         )
 
       ]);
@@ -108,7 +115,7 @@ function MyQueue() {
 
       const response =
         await axios.get(
-          `http://localhost:8080/queues/doctor/${savedQueue.doctorId}/today`
+          `${API_URL}/queues/doctor/${savedQueue.doctorId}/today`
         );
 
 
@@ -401,7 +408,7 @@ function MyQueue() {
 
       const response =
         await axios.put(
-          `http://localhost:8080/queues/${queueInfo.id}/cancel`
+          `${API_URL}/queues/${queueInfo.id}/cancel`
         );
 
 

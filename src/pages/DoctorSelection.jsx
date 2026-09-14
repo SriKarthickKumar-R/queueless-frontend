@@ -4,6 +4,9 @@ import axios from "axios";
 
 function DoctorSelection() {
 
+  // API base URL from Vite environment variable
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Get hospital and department IDs from the URL
   const { hospitalId, departmentId } = useParams();
 
@@ -28,7 +31,7 @@ function DoctorSelection() {
       try {
 
         const response = await axios.get(
-          `http://localhost:8080/doctors/hospital/${hospitalId}/department/${departmentId}`
+          `${API_URL}/doctors/hospital/${hospitalId}/department/${departmentId}`
         );
 
         console.log("Doctors:", response.data);
