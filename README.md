@@ -1,16 +1,63 @@
-# React + Vite
+# QueueLess — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A digital queue and appointment management platform that helps hospitals reduce waiting time and improve patient flow. This is the React client for QueueLess — it talks to the [QueueLess backend](https://github.com/SriKarthickKumar-R/queueless-backend), a Spring Boot REST API.
 
-Currently, two official plugins are available:
+**Live demo:** https://queueless-frontend-psi.vercel.app/
+**Backend repo:** https://github.com/SriKarthickKumar-R/queueless-backend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+QueueLess replaces physical hospital waiting lines with a live digital queue. Patients can book appointments and track their position in the queue in real time; doctors and administrators manage schedules and queue flow from their own dashboards.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Role-based views for patients, doctors, and administrators
+- Appointment booking and live queue position tracking
+- Client-side routing across role-specific dashboards
+- Communicates with the backend over a REST API
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React.js** — UI library
+- **Vite** — build tool and dev server
+- **React Router** — client-side routing
+- **JavaScript (ES6+)**
+- **CSS**
+- Deployed on **Vercel**
+
+## Architecture
+
+This frontend is a pure client — all business logic and persistence live in the [Spring Boot backend](https://github.com/SriKarthickKumar-R/queueless-backend), which is backed by MySQL and deployed on Render. The frontend calls the backend's REST endpoints for authentication, appointment booking, and queue status.
+
+## Getting started
+
+```bash
+# Clone the repo
+git clone https://github.com/SriKarthickKumar-R/queueless-frontend.git
+cd queueless-frontend
+
+# Install dependencies
+npm install
+
+# Set the backend API URL
+# create a .env file in the project root:
+# VITE_API_BASE_URL=https://your-backend-url.onrender.com
+
+# Run the dev server
+npm run dev
+```
+
+The app will be available at `http://localhost:5173` by default.
+
+## Build for production
+
+```bash
+npm run build
+```
+
+## Related repository
+
+- Backend (Spring Boot + MySQL): https://github.com/SriKarthickKumar-R/queueless-backend
+
+## Author
+
+**Sri Karthick Kumar R**
+[GitHub](https://github.com/SriKarthickKumar-R) · [LinkedIn](https://linkedin.com/in/srikarthickkumar-r)
