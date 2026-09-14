@@ -43,7 +43,6 @@ function App() {
 
       <Routes>
 
-
         {/* =========================
             PUBLIC LANDING PAGE
         ========================== */}
@@ -383,7 +382,7 @@ function App() {
         ========================== */}
 
         <Route
-          path="/reception"
+          path="/receptionist"
           element={
             <ReceptionistDashboard />
           }
