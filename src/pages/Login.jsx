@@ -4,28 +4,20 @@ import axios from "axios";
 
 function Login() {
 
-  // Backend API URL
   const API_URL = import.meta.env.VITE_API_URL;
 
-
-  // Store the email entered by the user
   const [email, setEmail] = useState("");
-
-  // Store the password entered by the user
   const [password, setPassword] = useState("");
 
-  // Used to move the user to another page
   const navigate = useNavigate();
 
 
   async function handleLogin(event) {
 
-    // Prevent the browser from refreshing the page
     event.preventDefault();
 
     try {
 
-      // Send login information to Spring Boot
       const response = await axios.post(
         `${API_URL}/auth/login`,
         {
@@ -37,33 +29,51 @@ function Login() {
       console.log("Login response:", response.data);
 
 
-      // If login was successful
       if (response.data) {
 
-        // Save patient information in browser
+        // Save logged-in user
         localStorage.setItem(
           "patient",
           JSON.stringify(response.data)
         );
 
+        // Save role separately
+        localStorage.setItem(
+          "userRole",
+          response.data.role || "PATIENT"
+        );
+
         alert("Login successful!");
 
-        // Go to dashboard
-        navigate("/dashboard");
+
+        // Receptionist
+        if (response.data.role === "RECEPTIONIST") {
+
+          navigate("/receptionist");
+
+        } else {
+
+          // Normal patient
+          navigate("/dashboard");
+
+        }
 
       } else {
 
-        // Login failed
         alert("Invalid email or password");
 
       }
 
     } catch (error) {
 
-      console.error("Login error:", error);
+      console.error(
+        "Login error:",
+        error
+      );
 
-      alert("Login failed. Please try again.");
-
+      alert(
+        "Login failed. Please try again."
+      );
     }
   }
 
@@ -74,31 +84,43 @@ function Login() {
 
       <div className="login-card">
 
-        <h1>Welcome to QueueLess</h1>
+        <h1>
+          Welcome to QueueLess
+        </h1>
 
-        <p>Login to manage your queue</p>
+        <p>
+          Login to manage your queue
+        </p>
 
 
         <form onSubmit={handleLogin}>
 
-          <label>Email</label>
+          <label>
+            Email
+          </label>
 
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) =>
+              setEmail(event.target.value)
+            }
             required
           />
 
 
-          <label>Password</label>
+          <label>
+            Password
+          </label>
 
           <input
             type="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) =>
+              setPassword(event.target.value)
+            }
             required
           />
 
